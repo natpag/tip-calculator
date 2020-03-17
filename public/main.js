@@ -23,7 +23,21 @@ const updateTeamTwoName = teamName => {
 const addtoTeamOneScore = addToScore => {
   console.log(addToScore + 'button clicked')
   const teamOneScore = document.querySelector('.team-1-score').textContent
-  const total = parseFloat(teamOneScore) + 1
+  let total = parseFloat(teamOneScore) + 1
+  if (total >= 21) {
+    total = 21
+    document.querySelector('.team-1-add-1-button').disabled = true
+    document.querySelector('.team-2-add-1-button').disabled = true
+    document.querySelector('.team-1-subtract-1-button').disabled = true
+    document.querySelector('.team-2-subtract-1-button').disabled = true
+    document.querySelector('.update-team-1-name').disabled = true
+    document.querySelector('.update-team-2-name').disabled = true
+
+    const teamName = document.querySelector('.team-1-name').textContent
+
+    document.querySelector('.displayWinner').textContent =
+      teamName + ' is the winner!'
+  }
   console.log(total)
   document.querySelector('.team-1-score').textContent = total
 }
@@ -31,7 +45,11 @@ const addtoTeamOneScore = addToScore => {
 const subtractFromTeamOneScore = subtractFromScore => {
   console.log(subtractFromScore + 'button clicked')
   const teamOneScore = document.querySelector('.team-1-score').textContent
-  const total = parseFloat(teamOneScore) - 1
+  let total = parseFloat(teamOneScore) - 1
+  if (total <= 0) {
+    total = 0
+  }
+
   console.log(total)
   document.querySelector('.team-1-score').textContent = total
 }
@@ -39,7 +57,21 @@ const subtractFromTeamOneScore = subtractFromScore => {
 const addtoTeamTwoScore = addToScore => {
   console.log(addToScore + 'button clicked')
   const teamTwoScore = document.querySelector('.team-2-score').textContent
-  const total = parseFloat(teamTwoScore) + 1
+  let total = parseFloat(teamTwoScore) + 1
+  if (total >= 21) {
+    total = 21
+    document.querySelector('.team-1-add-1-button').disabled = true
+    document.querySelector('.team-2-add-1-button').disabled = true
+    document.querySelector('.team-1-subtract-1-button').disabled = true
+    document.querySelector('.team-2-subtract-1-button').disabled = true
+    document.querySelector('.update-team-1-name').disabled = true
+    document.querySelector('.update-team-2-name').disabled = true
+
+    const teamName = document.querySelector('.team-2-name').textContent
+
+    document.querySelector('.displayWinner').textContent =
+      teamName + ' is the winner!'
+  }
   console.log(total)
   document.querySelector('.team-2-score').textContent = total
 }
@@ -47,9 +79,24 @@ const addtoTeamTwoScore = addToScore => {
 const subtractFromTeamTwoScore = subtractFromScore => {
   console.log(subtractFromScore + 'button clicked')
   const teamTwoScore = document.querySelector('.team-2-score').textContent
-  const total = parseFloat(teamTwoScore) - 1
+  let total = parseFloat(teamTwoScore) - 1
+  if (total <= 0) {
+    total = 0
+  }
   console.log(total)
   document.querySelector('.team-2-score').textContent = total
+}
+
+const resetTheGame = () => {
+  document.querySelector('.team-1-score').textContent = 0
+  document.querySelector('.team-2-score').textContent = 0
+  document.querySelector('.displayWinner').textContent = ''
+  document.querySelector('.team-1-add-1-button').disabled = false
+  document.querySelector('.team-2-add-1-button').disabled = false
+  document.querySelector('.team-1-subtract-1-button').disabled = false
+  document.querySelector('.team-2-subtract-1-button').disabled = false
+  document.querySelector('.update-team-1-name').disabled = false
+  document.querySelector('.update-team-2-name').disabled = false
 }
 
 /************************************************************/
@@ -79,3 +126,5 @@ document
 document
   .querySelector('.team-2-subtract-1-button')
   .addEventListener('click', subtractFromTeamTwoScore)
+
+document.querySelector('.resetGame').addEventListener('click', resetTheGame)
